@@ -1,0 +1,51 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest/globals": true
+  },
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jest/recommended"
+  ],
+  "overrides": [],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint", "react-hooks", "jest"],
+  "rules": {
+    "prefer-const": "warn",
+    "no-var": "error",
+    "no-plusplus": "off",
+    "no-undef": "off",
+    "radix": "error",
+    "no-empty-function": "error",
+    "spaced-comment": "warn",
+    "object-shorthand": "warn",
+    "no-use-before-define": "off",
+    "no-shadow": "off",
+    "default-param-last": "off",
+    "no-useless-computed-key": "off",
+    "no-underscore-dangle": "off",
+    "no-unused-expressions": ["error", { "allowTernary": true }],
+
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-extra-semi": "off",
+
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-no-useless-fragment": ["warn", { "allowExpressions": true }],
+    "react/no-unstable-nested-components": "warn"
+  }
+}
