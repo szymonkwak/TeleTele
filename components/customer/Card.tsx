@@ -7,7 +7,7 @@ const useStyles = createStyles((theme) => ({
     width: '450px',
     height: '200px',
     maxWidth: '450px',
-    margin: rem(10),
+    margin: 'auto',
     padding: rem(20),
     borderStyle: 'solid',
     borderColor: theme.colors.orange[5],
