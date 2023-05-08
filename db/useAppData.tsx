@@ -1,7 +1,7 @@
 import { useMantineTheme } from '@mantine/core';
-import { appData as data } from './appData';
 import { Antenna, DeviceTvOld, Phone, Tornado, Wifi } from 'tabler-icons-react';
-import { useEffect } from 'react';
+import { appData as data } from './appData';
+import { packagesData } from './packagesData';
 
 interface Icons {
   [key: string]: JSX.Element;
@@ -28,7 +28,7 @@ const useAppData = () => {
     icon: icons[item.name] || icons.default,
   }));
 
-  return { appData };
+  return { appData, packagesData };
 };
 
 export default useAppData;
