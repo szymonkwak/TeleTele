@@ -4,9 +4,9 @@ import { createStyles, Text, rem, Button, Overlay } from '@mantine/core';
 const useStyles = createStyles((theme) => ({
   container: {
     position: 'relative',
-    width: '450px',
-    height: '200px',
-    maxWidth: '450px',
+    width: '420px',
+    height: '190px',
+    maxWidth: '420px',
     margin: 'auto',
     padding: rem(20),
     borderStyle: 'solid',
@@ -23,22 +23,22 @@ const useStyles = createStyles((theme) => ({
   },
 
   label: {
-    margin: '20px 0 0 20px',
-    fontSize: rem(38),
+    margin: '16px 0 0 16px',
+    fontSize: rem(32),
     fontWeight: 700,
     lineHeight: 1,
   },
 
   price: {
-    fontSize: rem(20),
+    fontSize: rem(18),
     lineHeight: 1,
   },
 
   img: {
-    width: '120px',
-    height: '120px',
-    minWidth: '120px',
-    minHeight: '120px',
+    width: '100px',
+    height: '100px',
+    minWidth: '100px',
+    minHeight: '100px',
     borderRadius: '100%',
     marginRight: rem(20),
     alignSelf: 'center',
@@ -53,20 +53,17 @@ interface CardProps {
   label: string;
   price: number;
   icon: ReactNode;
+  addToCart: () => void;
 }
 
 const Card = (props: CardProps) => {
-  const { label, price, icon } = props;
+  const { label, price, icon, addToCart } = props;
 
   const { classes } = useStyles();
   const [overlayVisible, setOverlayVisible] = useState(false);
 
   const handleMouseEnter = () => setOverlayVisible(true);
   const handleMouseLeave = () => setOverlayVisible(false);
-
-  const handleAddToCart = () => {
-    console.log('dodano do koszyka');
-  };
 
   return (
     <div role="button" className={classes.container} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
@@ -79,7 +76,7 @@ const Card = (props: CardProps) => {
 
       {overlayVisible && (
         <Overlay blur={2} center>
-          <Button variant="outline" radius="xl" onClick={handleAddToCart}>
+          <Button variant="outline" radius="xl" onClick={addToCart}>
             Dodaj do koszyka
           </Button>
         </Overlay>

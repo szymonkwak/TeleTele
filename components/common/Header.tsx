@@ -3,17 +3,17 @@ import { useDisclosure } from '@mantine/hooks';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-const HEADER_HEIGHT = rem(60);
+export const HEADER_HEIGHT_PX = 60;
 
 const useStyles = createStyles((theme) => ({
   root: {
-    position: 'relative',
+    position: 'sticky',
     zIndex: 1,
   },
 
   dropdown: {
     position: 'absolute',
-    top: HEADER_HEIGHT,
+    top: rem(HEADER_HEIGHT_PX),
     left: 0,
     right: 0,
     zIndex: 0,
@@ -92,7 +92,7 @@ const Header = ({ links }: HeaderProps) => {
   ));
 
   return (
-    <MantineHeader height={HEADER_HEIGHT} className={classes.root}>
+    <MantineHeader height={rem(HEADER_HEIGHT_PX)} className={classes.root}>
       <Container className={classes.header}>
         {/* <Logo /> */}
         <Group spacing={5} className={classes.links}>

@@ -2,11 +2,12 @@ import Head from 'next/head';
 import { Button, MediaQuery, Text, Title, createStyles, rem } from '@mantine/core';
 import Link from 'next/link';
 import { routes } from '@/routes/routes';
+import { HEADER_HEIGHT_PX } from '@/components/common/Header';
 
 const useStyles = createStyles((theme) => ({
   background: {
-    marginTop: rem(-60),
-    paddingTop: rem(60),
+    marginTop: rem(-HEADER_HEIGHT_PX),
+    paddingTop: rem(HEADER_HEIGHT_PX),
     width: '100vw',
     height: '100vh',
     backgroundSize: 'cover',

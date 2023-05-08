@@ -43,7 +43,7 @@ const YearSelect = (props: YearSelectProps) => {
   };
 
   return (
-    <Flex mt={20}>
+    <Flex>
       <Text className={classes.year}>Wyświetl ofertę na rok</Text>
       <Select
         value={year}
