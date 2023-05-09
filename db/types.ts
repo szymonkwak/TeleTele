@@ -5,6 +5,10 @@ export interface Item {
   year: string;
 }
 
+export interface ItemWithIcon extends Item {
+  icon: JSX.Element;
+}
+
 export interface Package {
   ids: string[];
   name: string;

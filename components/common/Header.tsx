@@ -84,7 +84,7 @@ const Header = ({ links }: HeaderProps) => {
     <Link
       key={link.label}
       href={link.link}
-      className={cx(classes.link, { [classes.linkActive]: router.asPath === link.link })}
+      className={cx(classes.link, { [classes.linkActive]: `/${router.asPath.split('/')[1]}` === `/${link.link.split('/')[1]}` })}
       onClick={close}
     >
       {link.label}

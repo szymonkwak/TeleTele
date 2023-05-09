@@ -1,7 +1,7 @@
 const routes = {
   home: '/',
   customer: '/customer',
-  operator: '/operator',
+  operator: '/operator/items',
 };
 
 const routesArray = [

@@ -3,14 +3,10 @@ import { useMantineTheme } from '@mantine/core';
 import { Antenna, DeviceTvOld, Phone, Tornado, Wifi } from 'tabler-icons-react';
 import { appData as itemsData } from './appData';
 import { packagesData as pckgData } from './packagesData';
-import { Item, Package } from './types';
+import { Item, ItemWithIcon, Package } from './types';
 
 interface Icons {
   [key: string]: JSX.Element;
-}
-
-interface ItemWithIcon extends Item {
-  icon: JSX.Element;
 }
 
 /**
@@ -24,8 +20,12 @@ const useAppData = () => {
   const [appData, setAppData] = useState<ItemWithIcon[]>([]);
   const [packagesData, setPackagesData] = useState<Package[]>([]);
 
-  const resetData = () => {
+  const resetItems = () => {
     window.localStorage.removeItem('appData');
+    window.location.reload();
+  };
+
+  const resetPackages = () => {
     window.localStorage.removeItem('packagesData');
     window.location.reload();
   };
@@ -37,6 +37,8 @@ const useAppData = () => {
     Dekoder: <Antenna size={60} strokeWidth={2} color={theme.primaryColor} />,
     default: <Tornado size={60} strokeWidth={2} color={theme.primaryColor} />,
   };
+
+  const defaultIcon = icons.default;
 
   const getAppDataWithIcons = (data: Item[]): ItemWithIcon[] =>
     data.map((item) => ({
@@ -60,7 +62,7 @@ const useAppData = () => {
     setAppData(getAppDataWithIcons(data));
   }, []);
 
-  return { appData, setAppData, packagesData, setPackagesData, resetData };
+  return { appData, setAppData, packagesData, setPackagesData, resetItems, resetPackages, defaultIcon };
 };
 
 export default useAppData;
