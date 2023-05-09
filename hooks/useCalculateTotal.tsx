@@ -22,7 +22,7 @@ const useCalculateTotal = (cart: Item[]) => {
     const packages = cart.length ? packagesData.filter((pack) => pack.year === cart[0].year) : [];
     const discounts = packages.map((pckg) => (_.intersection(cartItemsIds, pckg.ids).length === pckg.ids.length ? pckg.discount : 0));
 
-    return total - Math.max(...discounts);
+    return discounts.length ? total - Math.max(...discounts) : total;
   };
 
   const getAppliedPackage = () => {
