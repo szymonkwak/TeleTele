@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Card, YearSelect, Cart, MobileDrawer, SummaryModal } from '@/components/customer';
 import { SimpleGrid, Stack, createStyles, rem } from '@mantine/core';
 import useAppData from '@/db/useAppData';
@@ -33,8 +33,12 @@ const Customer = () => {
 
   const [drawerOpened, setDrawerOpened] = useState(false);
   const [summaryOpened, setSummaryOpened] = useState(false);
-  const [year, setYear] = useState('2023');
+  const [year, setYear] = useState('');
   const [cart, setCart] = useState<Item[]>([]);
+
+  useEffect(() => {
+    if (appData.length) setYear(appData[0].year);
+  }, [appData]);
 
   const addToCart = (item: Item) => {
     if (cart.some((cartItem) => cartItem.id === item.id)) return console.log('already in cart'); // TODO popup item already in cart
@@ -44,13 +48,8 @@ const Customer = () => {
     setCart((prev) => prev.concat(item));
   };
 
-  const deleteFromCart = (id: string) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
-  };
-
-  const emptyCart = () => {
-    setCart([]);
-  };
+  const deleteFromCart = (id: string) => setCart((prev) => prev.filter((item) => item.id !== id));
+  const emptyCart = () => setCart([]);
 
   const showSummary = () => {
     setSummaryOpened(true);
@@ -60,7 +59,7 @@ const Customer = () => {
   return (
     <div className={classes.container}>
       <Stack align="center" spacing={0} className={classes.offer}>
-        <YearSelect year={year} setYear={setYear} />
+        <YearSelect year={year} setYear={setYear} appData={appData} />
         <SimpleGrid cols={2} spacing={30} breakpoints={[{ maxWidth: 1380, cols: 1, spacing: 'md' }]} className={classes.grid}>
           {appData
             .filter((item) => item.year === year)

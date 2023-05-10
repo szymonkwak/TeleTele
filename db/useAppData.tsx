@@ -18,7 +18,7 @@ const useAppData = () => {
   const theme = useMantineTheme();
 
   const [appData, setAppData] = useState<ItemWithIcon[]>([]);
-  const [packagesData, setPackagesData] = useState<Package[]>([]);
+  const [packagesData, setPackagesData] = useState<Package[]>(pckgData);
 
   const resetItems = () => {
     window.localStorage.removeItem('appData');
@@ -47,7 +47,7 @@ const useAppData = () => {
     }));
 
   useEffect(() => {
-    if (packagesData.length) window.localStorage.setItem('packagesData', JSON.stringify(packagesData));
+    if (packagesData.length !== pckgData.length) window.localStorage.setItem('packagesData', JSON.stringify(packagesData));
     if (appData.length)
       window.localStorage.setItem('appData', JSON.stringify(appData.map(({ id, name, year, price }) => ({ id, name, year, price }))));
   }, [packagesData, appData]);

@@ -1,6 +1,5 @@
-import { screen } from '@testing-library/react';
-import { render } from '@/test/config';
-import { SummaryModal } from '@/components/customer';
+import { renderHook } from '@testing-library/react';
+import useCalculateTotal from '../useCalculateTotal';
 
 const cartMock = [
   {
@@ -70,29 +69,29 @@ const cartMock4 = [
 
 describe('useCalculateTotal', () => {
   it('should return the total of the items', () => {
-    render(<SummaryModal cart={cartMock} open={true} setOpen={jest.fn} />);
+    const { result } = renderHook(() => useCalculateTotal(cartMock));
 
-    expect(screen.getByText(/300.00/i)).toBeInTheDocument();
-    expect(screen.queryByText(/301.00/i)).not.toBeInTheDocument();
+    expect(result.current.total).toBe(300);
+    expect(result.current.total).not.toBe(301);
   });
 
   it('should apply the discount', () => {
-    render(<SummaryModal cart={cartMock2} open={true} setOpen={jest.fn} />);
+    const { result } = renderHook(() => useCalculateTotal(cartMock2));
 
-    expect(screen.getByText(/79.00/i)).toBeInTheDocument();
-    expect(screen.getByText('Internet + Telewizja')).toBeInTheDocument();
+    expect(result.current.total).toBe(79);
+    expect(result.current.appliedPackage?.name).toBe('Internet + Telewizja');
   });
 
   it('should apply the highest discount', () => {
-    render(<SummaryModal cart={cartMock3} open={true} setOpen={jest.fn} />);
+    const { result } = renderHook(() => useCalculateTotal(cartMock3));
 
-    expect(screen.getByText('Internet + Telewizja')).toBeInTheDocument();
-    expect(screen.queryByText('Internet + Abonament telefoniczny')).not.toBeInTheDocument();
+    expect(result.current.appliedPackage?.name).toBe('Internet + Telewizja');
+    expect(result.current.appliedPackage?.name).not.toBe('Internet + Abonament telefoniczny');
   });
 
   it('should not apply discount when items from different year', () => {
-    render(<SummaryModal cart={cartMock4} open={true} setOpen={jest.fn} />);
+    const { result } = renderHook(() => useCalculateTotal(cartMock4));
 
-    expect(screen.queryByText('Internet + Telewizja')).not.toBeInTheDocument();
+    expect(result.current.appliedPackage?.name).not.toBe('Internet + Telewizja');
   });
 });

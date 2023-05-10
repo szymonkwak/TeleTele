@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import { ChevronDown } from 'tabler-icons-react';
 import { Flex, Select, Text, createStyles, rem } from '@mantine/core';
-import useAppData from '@/db/useAppData';
+import { ItemWithIcon } from '@/db/types';
 
 // TODO style na małym ekranie
 
@@ -30,12 +30,12 @@ const useStyles = createStyles((theme) => ({
 interface YearSelectProps {
   year: string;
   setYear: Dispatch<SetStateAction<string>>;
+  appData: ItemWithIcon[];
 }
 
 const YearSelect = (props: YearSelectProps) => {
-  const { year, setYear } = props;
+  const { year, setYear, appData } = props;
 
-  const { appData } = useAppData();
   const { classes } = useStyles();
 
   const handleSelectChange = (e: string | null) => {
@@ -48,7 +48,7 @@ const YearSelect = (props: YearSelectProps) => {
       <Select
         value={year}
         onChange={handleSelectChange}
-        data={[...new Set(['2023', ...appData.map((item) => item.year)])]}
+        data={new Set(appData).size ? [...new Set([...appData.map((item) => item.year)])] : ['2023']}
         className={classes.select}
         rightSection={<ChevronDown size="0" />}
         rightSectionWidth={1}
