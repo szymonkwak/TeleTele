@@ -10,7 +10,8 @@ export interface ItemWithIcon extends Item {
 }
 
 export interface Package {
-  ids: string[];
+  id: string;
+  packageItems: string[];
   name: string;
   year: string;
   discount: number;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useMantineTheme } from '@mantine/core';
 import { Antenna, DeviceTvOld, Phone, Tornado, Wifi } from 'tabler-icons-react';
+import _ from 'lodash';
 import { appData as itemsData } from './appData';
 import { packagesData as pckgData } from './packagesData';
 import { Item, ItemWithIcon, Package } from './types';
@@ -47,7 +48,7 @@ const useAppData = () => {
     }));
 
   useEffect(() => {
-    if (packagesData.length !== pckgData.length) window.localStorage.setItem('packagesData', JSON.stringify(packagesData));
+    if (!_.isEqual(packagesData, pckgData)) window.localStorage.setItem('packagesData', JSON.stringify(packagesData));
     if (appData.length)
       window.localStorage.setItem('appData', JSON.stringify(appData.map(({ id, name, year, price }) => ({ id, name, year, price }))));
   }, [packagesData, appData]);
@@ -57,7 +58,7 @@ const useAppData = () => {
     packagesFromStorage ? setPackagesData(JSON.parse(packagesFromStorage)) : setPackagesData(pckgData);
 
     const appDataFromStorage = window.localStorage.getItem('appData');
-    const data: Omit<Item, 'icon'>[] = appDataFromStorage ? JSON.parse(appDataFromStorage) : itemsData;
+    const data: Item[] = appDataFromStorage ? JSON.parse(appDataFromStorage) : itemsData;
 
     setAppData(getAppDataWithIcons(data));
   }, []);

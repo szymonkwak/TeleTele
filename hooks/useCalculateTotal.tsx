@@ -20,7 +20,9 @@ const useCalculateTotal = (cart: Item[]) => {
     const cartItemsIds = cart.map((item) => item.id);
 
     const packages = cart.length ? packagesData.filter((pack) => pack.year === cart[0].year) : [];
-    const discounts = packages.map((pckg) => (_.intersection(cartItemsIds, pckg.ids).length === pckg.ids.length ? pckg.discount : 0));
+    const discounts = packages.map((pckg) =>
+      _.intersection(cartItemsIds, pckg.packageItems).length === pckg.packageItems.length ? pckg.discount : 0
+    );
 
     return discounts.length ? total - Math.max(...discounts) : total;
   };
@@ -30,7 +32,7 @@ const useCalculateTotal = (cart: Item[]) => {
 
     const packages = cart.length ? packagesData.filter((pack) => pack.year === cart[0].year) : [];
     const appliedPackages = packages
-      .map((pckg) => (_.intersection(cartItemsIds, pckg.ids).length === pckg.ids.length ? pckg : null))
+      .map((pckg) => (_.intersection(cartItemsIds, pckg.packageItems).length === pckg.packageItems.length ? pckg : null))
       .filter((pckg): pckg is Package => pckg !== null)
       .sort((a, b) => b.discount - a.discount);
 

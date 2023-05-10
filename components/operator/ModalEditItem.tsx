@@ -44,7 +44,7 @@ const ModalEditItem = (props: ModalEditItemProps) => {
     <Modal title="Edycja usługi" opened={!!item} onClose={() => setItemToEdit(null)}>
       <Box component="form" onSubmit={form.onSubmit(handleSaveEdited)}>
         <TextInput label="Nazwa usługi" {...form.getInputProps('name')} mt="sm" />
-        <NumberInput label="Rok" withAsterisk {...form.getInputProps('year')} mt="sm" />
+        <NumberInput label="Rok" {...form.getInputProps('year')} mt="sm" />
         <NumberInput label="Cena" precision={2} {...form.getInputProps('price')} mt="sm" />
         <Flex mt="md" justify="space-between">
           <Button onClick={form.reset} rightIcon={<Rotate />} variant="default">
