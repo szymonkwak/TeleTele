@@ -3,18 +3,18 @@ import { ChevronDown } from 'tabler-icons-react';
 import { Flex, Select, Text, createStyles, rem } from '@mantine/core';
 import { ItemWithIcon } from '@/db/types';
 
-// TODO style na małym ekranie
-
 const useStyles = createStyles((theme) => ({
   year: {
     fontSize: rem(38),
     fontWeight: 700,
     flexShrink: 0,
+    [theme.fn.smallerThan('sm')]: { fontSize: rem(24) },
   },
 
   select: {
     width: rem(95),
     margin: rem(10),
+    [theme.fn.smallerThan('sm')]: { width: rem(65), margin: rem(0), marginLeft: rem(5) },
     '& input': {
       color: theme.colors.orange[5],
       fontSize: rem(38),
@@ -22,6 +22,7 @@ const useStyles = createStyles((theme) => ({
       backgroundColor: 'transparent',
       border: 'none',
       padding: '2px',
+      [theme.fn.smallerThan('sm')]: { fontSize: rem(24) },
     },
     '& input:hover': { color: theme.colors.orange[7] },
   },

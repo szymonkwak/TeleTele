@@ -2,12 +2,12 @@ import React, { ReactNode } from 'react';
 import { ActionIcon, Drawer, Indicator, createStyles, rem } from '@mantine/core';
 import { ShoppingCart } from 'tabler-icons-react';
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(() => ({
   cart: {
     position: 'absolute',
     zIndex: 1,
     top: rem(18),
-    right: rem(10),
+    right: rem(18),
   },
 }));
 

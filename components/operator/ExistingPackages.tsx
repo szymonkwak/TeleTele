@@ -8,12 +8,19 @@ import ModalEditPackage from './ModalEditPackage';
 
 const useStyles = createStyles((theme) => ({
   table: {
+    height: 0,
     '& th:not(:first-of-type)': { textAlign: 'right !important' as 'right' },
     '& td:not(:first-of-type)': { textAlign: 'right !important' as 'right' },
     '& th': { color: `${theme.colors.orange[4]} !important` },
   },
 
-  action: { display: 'flex', justifyContent: 'end', gap: 3 },
+  action: {
+    display: 'flex',
+    justifyContent: 'end',
+    alignItems: 'center',
+    height: '100%',
+    gap: 3,
+  },
 
   red: { color: theme.colors.red[6] },
 }));

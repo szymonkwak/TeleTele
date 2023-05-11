@@ -18,6 +18,7 @@ const useStyles = createStyles((theme) => ({
   offer: {
     flexGrow: 1,
     padding: `${rem(10)} ${rem(30)}`,
+    [theme.fn.smallerThan('sm')]: { padding: rem(10) },
   },
 
   grid: {

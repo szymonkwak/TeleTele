@@ -14,6 +14,12 @@ const useStyles = createStyles((theme) => ({
     backgroundColor: theme.colors.dark[9],
     display: 'flex',
     justifyContent: 'space-between',
+    [theme.fn.smallerThan('sm')]: {
+      width: '280px',
+      maxWidth: '280px',
+      height: '130px',
+      padding: rem(10),
+    },
   },
 
   text: {
@@ -27,11 +33,13 @@ const useStyles = createStyles((theme) => ({
     fontSize: rem(32),
     fontWeight: 700,
     lineHeight: 1,
+    [theme.fn.smallerThan('sm')]: { margin: '8px 0 0 8px', fontSize: rem(28) },
   },
 
   price: {
     fontSize: rem(18),
     lineHeight: 1,
+    [theme.fn.smallerThan('sm')]: { fontSize: rem(14) },
   },
 
   img: {
@@ -46,6 +54,17 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    [theme.fn.smallerThan('sm')]: {
+      width: '60px',
+      height: '60px',
+      minWidth: '60px',
+      minHeight: '60px',
+      marginRight: rem(10),
+      '& > svg': {
+        width: '35px',
+        height: '35px',
+      },
+    },
   },
 }));
 

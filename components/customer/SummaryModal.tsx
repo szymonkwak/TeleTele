@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Modal, Table, Text, createStyles, rem } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { Item } from '@/db/types';
 import { Rocket } from 'tabler-icons-react';
 import { useCalculateTotal } from '@/hooks';
@@ -44,10 +45,11 @@ const SummaryModal = (props: SummaryModalProps) => {
   const { open, setOpen, cart } = props;
 
   const { classes } = useStyles();
+  const isMobile = useMediaQuery('(max-width: 768px)');
   const { total, appliedPackage } = useCalculateTotal(cart);
 
   return (
-    <Modal title="Podsumowanie" opened={open} onClose={() => setOpen(false)} centered size="lg">
+    <Modal title="Podsumowanie" fullScreen={isMobile} opened={open} onClose={() => setOpen(false)} size="lg">
       <Text className={classes.title}>Zamówione usługi:</Text>
       <Table fontSize="lg">
         <thead>

@@ -13,10 +13,10 @@ const ResetAddButtons = (props: ResetAddButtonsProps) => {
   return (
     <Flex mt="md" justify="end" gap={10}>
       <Button onClick={reset} rightIcon={<Rotate />} variant="outline">
-        Zresetuj usługi
+        Zresetuj
       </Button>
       <Button onClick={addNew} rightIcon={<Plus />} variant="outline">
-        Dodaj nową usługę
+        Dodaj
       </Button>
     </Flex>
   );

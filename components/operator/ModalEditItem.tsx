@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { Box, Button, Flex, Modal, NumberInput, TextInput } from '@mantine/core';
 import { isInRange, isNotEmpty, useForm } from '@mantine/form';
+import { useMediaQuery } from '@mantine/hooks';
 import { DeviceFloppy, Rotate } from 'tabler-icons-react';
 import { ItemWithIcon } from '@/db/types';
 import useAppData from '@/db/useAppData';
@@ -13,6 +14,7 @@ interface ModalEditItemProps {
 const ModalEditItem = (props: ModalEditItemProps) => {
   const { item, setItemToEdit } = props;
 
+  const isMobile = useMediaQuery('(max-width: 768px)');
   const { appData, setAppData } = useAppData();
 
   const form = useForm({
@@ -41,7 +43,7 @@ const ModalEditItem = (props: ModalEditItemProps) => {
   };
 
   return (
-    <Modal title="Edycja usługi" opened={!!item} onClose={() => setItemToEdit(null)}>
+    <Modal title="Edycja usługi" fullScreen={isMobile} opened={!!item} onClose={() => setItemToEdit(null)}>
       <Box component="form" onSubmit={form.onSubmit(handleSaveEdited)}>
         <TextInput label="Nazwa usługi" {...form.getInputProps('name')} mt="sm" />
         <NumberInput label="Rok" {...form.getInputProps('year')} mt="sm" />

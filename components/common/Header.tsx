@@ -1,7 +1,8 @@
-import { createStyles, Header as MantineHeader, Container, Group, Burger, Paper, Transition, rem } from '@mantine/core';
+import { createStyles, Header as MantineHeader, Container, Group, Burger, Paper, Transition, rem, MediaQuery } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Socials from './Socials';
 
 export const HEADER_HEIGHT_PX = 60;
 
@@ -68,6 +69,11 @@ const useStyles = createStyles((theme) => ({
       color: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).color,
     },
   },
+
+  socials: {
+    marginRight: rem(40),
+    [theme.fn.smallerThan('sm')]: { display: 'none' },
+  },
 }));
 
 interface HeaderProps {
@@ -94,7 +100,6 @@ const Header = ({ links }: HeaderProps) => {
   return (
     <MantineHeader height={rem(HEADER_HEIGHT_PX)} className={classes.root}>
       <Container className={classes.header}>
-        {/* <Logo /> */}
         <Group spacing={5} className={classes.links}>
           {items}
         </Group>
@@ -105,9 +110,11 @@ const Header = ({ links }: HeaderProps) => {
           {(styles) => (
             <Paper className={classes.dropdown} withBorder style={styles}>
               {items}
+              <Socials />
             </Paper>
           )}
         </Transition>
+        <Socials className={classes.socials} />
       </Container>
     </MantineHeader>
   );

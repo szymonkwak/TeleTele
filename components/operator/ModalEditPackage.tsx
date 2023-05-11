@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { Box, Button, Chip, Flex, Modal, NumberInput, Text, TextInput, createStyles, rem } from '@mantine/core';
 import { isInRange, isNotEmpty, useForm } from '@mantine/form';
+import { useMediaQuery } from '@mantine/hooks';
 import { DeviceFloppy, Rotate } from 'tabler-icons-react';
 import { Package } from '@/db/types';
 import useAppData from '@/db/useAppData';
@@ -36,6 +37,7 @@ const ModalEditPackage = (props: ModalEditItemProps) => {
   const { pckg, setPackageToEdit } = props;
 
   const { classes, cx } = useStyles();
+  const isMobile = useMediaQuery('(max-width: 768px)');
   const { packagesData, setPackagesData, appData } = useAppData();
 
   const form = useForm({
@@ -71,7 +73,7 @@ const ModalEditPackage = (props: ModalEditItemProps) => {
   };
 
   return (
-    <Modal title="Edycja pakietu" size={1000} opened={!!pckg} onClose={() => setPackageToEdit(null)}>
+    <Modal title="Edycja pakietu" size={1000} fullScreen={isMobile} opened={!!pckg} onClose={() => setPackageToEdit(null)}>
       <Box component="form" onSubmit={form.onSubmit(handleSaveEdited)}>
         <TextInput label="Nazwa pakietu" {...form.getInputProps('name')} mt="sm" />
         <NumberInput label="Rok" {...form.getInputProps('year')} mt="sm" />
