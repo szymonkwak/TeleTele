@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { Box, Button, Flex, Modal, NumberInput, TextInput } from '@mantine/core';
-import { isInRange, isNotEmpty, useForm } from '@mantine/form';
+import { hasLength, isInRange, useForm } from '@mantine/form';
 import { useMediaQuery } from '@mantine/hooks';
 import { DeviceFloppy, Rotate } from 'tabler-icons-react';
 import { ItemWithIcon } from '@/db/types';
@@ -25,7 +25,7 @@ const ModalEditItem = (props: ModalEditItemProps) => {
       price: item.price,
     },
     validate: {
-      name: isNotEmpty('Nazwa nie może być pusta'),
+      name: hasLength({ min: 1, max: 30 }, 'Nazwa musi być któtsza niż 30 zaków'),
       price: isInRange({ min: 0 }, 'Podaj poprawną cenę'),
       year: isInRange({ min: 2022, max: 3000 }, 'Podaj rok od 2022 wzwyż'),
     },

@@ -33,7 +33,7 @@ const useStyles = createStyles((theme) => ({
     fontSize: rem(32),
     fontWeight: 700,
     lineHeight: 1,
-    [theme.fn.smallerThan('sm')]: { margin: '8px 0 0 8px', fontSize: rem(28) },
+    [theme.fn.smallerThan('sm')]: { margin: '8px 0 0 8px', fontSize: rem(26) },
   },
 
   price: {

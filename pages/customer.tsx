@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Card, YearSelect, Cart, MobileDrawer, SummaryModal } from '@/components/customer';
 import { SimpleGrid, Stack, createStyles, rem } from '@mantine/core';
+import { notifications } from '@mantine/notifications';
+import { useMediaQuery } from '@mantine/hooks';
+import { Card, YearSelect, Cart, MobileDrawer, SummaryModal } from '@/components/customer';
+import { HEADER_HEIGHT_PX } from '@/components/common/Header';
 import useAppData from '@/db/useAppData';
 import { Item } from '@/db/types';
-import { HEADER_HEIGHT_PX } from '@/components/common/Header';
-import { useMediaQuery } from '@mantine/hooks';
 
 const useStyles = createStyles((theme) => ({
   container: {
@@ -43,14 +44,26 @@ const Customer = () => {
   }, [appData]);
 
   const addToCart = (item: Item) => {
-    if (cart.some((cartItem) => cartItem.id === item.id)) return console.log('already in cart'); // TODO popup item already in cart
-    if (cart.some((cartItem) => cartItem.year !== item.year)) return console.log('from different year'); // TODO popup item from different year
-    if (item.id.includes('dekoder') && !cart.some((cartItem) => cartItem.id.includes('telewizja')))
-      return console.log('dekoder without TV'); // TODO popup dekoder without TV
+    if (cart.some((cartItem) => cartItem.id === item.id)) {
+      return notifications.show({ message: 'Usługa jest już w koszyku.', withBorder: true });
+    }
+    if (cart.some((cartItem) => cartItem.year !== item.year)) {
+      return notifications.show({ message: 'Można zamówić usługi tylko na jeden rok.', withBorder: true });
+    }
+    if (item.id.includes('dekoder') && !cart.some((cartItem) => cartItem.id.includes('telewizja'))) {
+      return notifications.show({ message: 'Aby zamówić dekoder musisz zamówić telewizję.', withBorder: true });
+    }
     setCart((prev) => prev.concat(item));
   };
 
-  const deleteFromCart = (id: string) => setCart((prev) => prev.filter((item) => item.id !== id));
+  const deleteFromCart = (item: Item) => {
+    if (item.name.toLowerCase().includes('telewizja')) {
+      setCart((prev) => prev.filter((i) => i.id !== item.id).filter((i) => !i.name.toLowerCase().includes('dekoder')));
+      return;
+    }
+
+    setCart((prev) => prev.filter((i) => i.id !== item.id));
+  };
   const emptyCart = () => setCart([]);
 
   const showSummary = () => {

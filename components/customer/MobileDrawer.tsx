@@ -4,7 +4,7 @@ import { ShoppingCart } from 'tabler-icons-react';
 
 const useStyles = createStyles(() => ({
   cart: {
-    position: 'absolute',
+    position: 'fixed',
     zIndex: 1,
     top: rem(18),
     right: rem(18),

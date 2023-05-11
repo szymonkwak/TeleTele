@@ -24,7 +24,9 @@ const useCalculateTotal = (cart: Item[]) => {
       _.intersection(cartItemsIds, pckg.packageItems).length === pckg.packageItems.length ? pckg.discount : 0
     );
 
-    return discounts.length ? total - Math.max(...discounts) : total;
+    const result = discounts.length ? total - Math.max(...discounts) : total;
+
+    return result < 0 ? 0 : result;
   };
 
   const getAppliedPackage = () => {

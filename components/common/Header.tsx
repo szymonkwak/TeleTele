@@ -1,4 +1,4 @@
-import { createStyles, Header as MantineHeader, Container, Group, Burger, Paper, Transition, rem, MediaQuery } from '@mantine/core';
+import { createStyles, Header as MantineHeader, Container, Group, Burger, Paper, Transition, rem } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Link from 'next/link';
 import { useRouter } from 'next/router';

@@ -60,7 +60,7 @@ const useStyles = createStyles((theme) => ({
 
 interface CartProps {
   cart: Item[];
-  deleteFromCart: (id: string) => void;
+  deleteFromCart: (item: Item) => void;
   emptyCart: () => void;
   onSummary: () => void;
 }
@@ -80,7 +80,7 @@ const Cart = (props: CartProps) => {
           {cart.map((item) => (
             <div className={classes.item} key={item.id}>
               {item.name}, {item.year}
-              <ActionIcon onClick={() => deleteFromCart(item.id)}>
+              <ActionIcon onClick={() => deleteFromCart(item)}>
                 <TrashX size={22} strokeWidth={1.5} color={theme.colors.red[6]} />
               </ActionIcon>
             </div>
