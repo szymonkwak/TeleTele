@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { Button, MediaQuery, Text, Title, createStyles, rem } from '@mantine/core';
+import Image from 'next/image';
 import Link from 'next/link';
 import { routes } from '@/routes/routes';
 import { HEADER_HEIGHT_PX } from '@/components/common/Header';
@@ -20,21 +21,18 @@ const useStyles = createStyles((theme) => ({
 
     '& h1': {
       fontSize: '3.9rem',
-      [theme.fn.smallerThan('sm')]: { fontSize: '2.5rem' },
-    },
-
-    '& h2': {
-      fontWeight: 200,
-      fontSize: '2rem',
-      [theme.fn.smallerThan('sm')]: { fontSize: '1.5rem' },
+      [theme.fn.smallerThan('sm')]: { fontSize: '2rem' },
     },
   },
 
   content: {
     marginLeft: '15%',
+    marginBottom: rem(100),
     maxWidth: rem(500),
-    [theme.fn.smallerThan('sm')]: { margin: rem(30) },
+    [theme.fn.smallerThan('sm')]: { margin: rem(30), marginBottom: rem(150) },
   },
+
+  logo: { marginLeft: rem(-3), [theme.fn.smallerThan('sm')]: { width: 140 } },
 
   text: { [theme.fn.largerThan('sm')]: { fontSize: '1.1rem' } },
 
@@ -49,12 +47,12 @@ const Home = () => {
       <Head>
         <title>TeleTele</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.svg" />
       </Head>
 
       <div className={classes.background}>
         <div className={classes.content}>
-          <Title order={2}>TeleTele</Title>
+          <Image src="/logo.svg" alt="logo" className={classes.logo} width={160} height={70} />
           <Title order={1}>Dostawca usług telekomunikacyjnych</Title>
           <Text className={classes.text}>
             W ofercie telewizja, internet, telefon oraz dekoder. <br /> Przy zakupie pakietów dostępne rabaty.

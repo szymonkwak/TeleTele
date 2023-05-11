@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { Tabs, createStyles, rem } from '@mantine/core';
 import { List, Package } from 'tabler-icons-react';
 import { useRouter } from 'next/router';
@@ -25,23 +26,35 @@ const Operator = () => {
   const router = useRouter();
 
   return (
-    <Tabs value={router.query.tab?.[0] as string} onTabChange={(value) => router.push(`/operator/${value}`)} className={classes.container}>
-      <Tabs.List mt="md" mb="md">
-        <Tabs.Tab value="items" icon={<List />}>
-          Lista usług
-        </Tabs.Tab>
-        <Tabs.Tab value="packages" icon={<Package />}>
-          Lista pakietów
-        </Tabs.Tab>
-      </Tabs.List>
+    <>
+      <Head>
+        <title>TeleTele - strefa operatora</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.svg" />
+      </Head>
 
-      <Tabs.Panel value="items">
-        <ExistingItems />
-      </Tabs.Panel>
-      <Tabs.Panel value="packages">
-        <ExistingPackages />
-      </Tabs.Panel>
-    </Tabs>
+      <Tabs
+        value={router.query.tab?.[0] as string}
+        onTabChange={(value) => router.push(`/operator/${value}`)}
+        className={classes.container}
+      >
+        <Tabs.List mt="md" mb="md">
+          <Tabs.Tab value="items" icon={<List />}>
+            Lista usług
+          </Tabs.Tab>
+          <Tabs.Tab value="packages" icon={<Package />}>
+            Lista pakietów
+          </Tabs.Tab>
+        </Tabs.List>
+
+        <Tabs.Panel value="items">
+          <ExistingItems />
+        </Tabs.Panel>
+        <Tabs.Panel value="packages">
+          <ExistingPackages />
+        </Tabs.Panel>
+      </Tabs>
+    </>
   );
 };
 

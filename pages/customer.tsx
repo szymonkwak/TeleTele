@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Head from 'next/head';
 import { Card, YearSelect, Cart, MobileDrawer, SummaryModal } from '@/components/customer';
 import { SimpleGrid, Stack, createStyles, rem } from '@mantine/core';
 import useAppData from '@/db/useAppData';
@@ -58,28 +59,36 @@ const Customer = () => {
   };
 
   return (
-    <div className={classes.container}>
-      <Stack align="center" spacing={0} className={classes.offer}>
-        <YearSelect year={year} setYear={setYear} appData={appData} />
-        <SimpleGrid cols={2} spacing={30} breakpoints={[{ maxWidth: 1380, cols: 1, spacing: 'md' }]} className={classes.grid}>
-          {appData
-            .filter((item) => item.year === year)
-            .map((item) => (
-              <Card key={item.id} label={item.name} price={item.price} icon={item.icon} addToCart={() => addToCart(item)} />
-            ))}
-        </SimpleGrid>
-      </Stack>
+    <>
+      <Head>
+        <title>TeleTele - strefa klienta</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.svg" />
+      </Head>
 
-      {isMobile ? (
-        <MobileDrawer open={drawerOpened} setOpen={setDrawerOpened} indicatorValue={cart.length}>
+      <div className={classes.container}>
+        <Stack align="center" spacing={0} className={classes.offer}>
+          <YearSelect year={year} setYear={setYear} appData={appData} />
+          <SimpleGrid cols={2} spacing={30} breakpoints={[{ maxWidth: 1380, cols: 1, spacing: 'md' }]} className={classes.grid}>
+            {appData
+              .filter((item) => item.year === year)
+              .map((item) => (
+                <Card key={item.id} label={item.name} price={item.price} icon={item.icon} addToCart={() => addToCart(item)} />
+              ))}
+          </SimpleGrid>
+        </Stack>
+
+        {isMobile ? (
+          <MobileDrawer open={drawerOpened} setOpen={setDrawerOpened} indicatorValue={cart.length}>
+            <Cart cart={cart} deleteFromCart={deleteFromCart} emptyCart={emptyCart} onSummary={showSummary} />
+          </MobileDrawer>
+        ) : (
           <Cart cart={cart} deleteFromCart={deleteFromCart} emptyCart={emptyCart} onSummary={showSummary} />
-        </MobileDrawer>
-      ) : (
-        <Cart cart={cart} deleteFromCart={deleteFromCart} emptyCart={emptyCart} onSummary={showSummary} />
-      )}
+        )}
 
-      <SummaryModal cart={cart} open={summaryOpened} setOpen={setSummaryOpened} />
-    </div>
+        <SummaryModal cart={cart} open={summaryOpened} setOpen={setSummaryOpened} />
+      </div>
+    </>
   );
 };
 
