@@ -23,6 +23,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   text: {
+    minWidth: 0,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -33,6 +34,8 @@ const useStyles = createStyles((theme) => ({
     fontSize: rem(32),
     fontWeight: 700,
     lineHeight: 1,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
     [theme.fn.smallerThan('sm')]: { margin: '8px 0 0 8px', fontSize: rem(26) },
   },
 

@@ -49,7 +49,7 @@ const YearSelect = (props: YearSelectProps) => {
       <Select
         value={year}
         onChange={handleSelectChange}
-        data={new Set(appData).size ? [...new Set([...appData.map((item) => item.year)])] : ['2023']}
+        data={new Set(appData).size ? [...new Set([...appData.map((item) => item.year)].sort())] : ['2023']}
         className={classes.select}
         rightSection={<ChevronDown size="0" />}
         rightSectionWidth={1}
